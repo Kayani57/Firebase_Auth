@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, Button, Container, Box } from '@mui/material';
+import Login from './components/Auth/Login';
+import Signup from './components/Auth/Signup';
+import ForgotPassword from './components/Auth/ForgotPassword';
+import Todo from './components/Todo/Todo';
 
-function App() {
-  const [count, setCount] = useState(0)
 
+
+
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Router>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h4" component="div" sx={{marginRight:'200px',flexGrow: 1 }}>
+           Todo List       
+          </Typography>
+          <Button color="inherit" component={Link} to="/">Login</Button>
+          <Button color="inherit" component={Link} to="/signup">Signup</Button>
+          <Button color="inherit" component={Link} to="/forgot-password">Forgot Password</Button>
+        </Toolbar>
+      </AppBar>
 
-export default App
+      <Container>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/todo" element={<Todo />} />
+        </Routes>
+      </Container>
+    </Router>
+  );
+};
+
+export default App;
